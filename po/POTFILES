@@ -1,0 +1,4 @@
+data/li.per.pl.desktop.in
+data/li.per.pl.appdata.xml.in
+data/li.per.pl.gschema.xml
+src/window.ui
