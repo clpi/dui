@@ -1,15 +1,25 @@
 use gettextrs::*;
 use gio::prelude::*;
 use gtk::prelude::*;
+use crossbeam_channel::unbounded;
 
-mod config;
-mod window;
-mod models;
+pub mod config;
+pub mod app_config;
+pub mod window;
+pub mod models;
+pub mod app;
+pub mod ui;
+pub mod state;
 
-use crate::window::Window;
+use crate::{
+    window::Win,
+    state::State,
+};
 
 fn main() {
     gtk::init().unwrap_or_else(|_| panic!("Failed to initialize GTK."));
+    glib::set_program_name(Some("per.li"));
+    glib::set_application_name("per.li".into());
 
     setlocale(LocaleCategory::LcAll, "");
     bindtextdomain("pl", config::LOCALEDIR);
@@ -21,7 +31,19 @@ fn main() {
 
     let app = gtk::Application::new(Some("li.per.pl"), Default::default()).unwrap();
     app.connect_activate(move |app| {
-        let window = Window::new();
+        let window = app.run(&["per".into()]);
+        let (mut req_recv, req_updt) = unbounded::<State>();
+        let (res_send, res_recv) = glib::MainContext::channel(glib::PRIORITY_DEFAULT);
+        std::thread::spawn(move || {
+            loop {
+                let req = req_recv.latest_mut();
+                if let Some(state) = req.take() {
+                    res_send.send("Hello!".into()).expect("No open GLIB channel");
+                }
+            }
+            std::thread::sleep_ms(100);
+        });
+        let icon_theme = gtk::IconTheme::get_default().expect("Could not load icon theme");
 
         window.widget.set_application(Some(app));
         app.add_window(&window.widget);

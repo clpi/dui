@@ -13,7 +13,7 @@
     </child>
     <child>
       <object class="GtkLabel" id="label">
-        <property name="label">Hello, World!</property>
+        <property name="label">Hello, friendo!</property>
         <property name="visible">True</property>
         <attributes>
           <attribute name="weight" value="bold"/>

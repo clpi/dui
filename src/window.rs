@@ -1,20 +1,25 @@
-use crate::models::User;
 use gtk::prelude::*;
+use crate::{
+    app_config::AppConfig, models::user::User,
+};
 
-pub struct Window {
+pub struct Win {
+    config: AppConfig,
     pub widget: gtk::ApplicationWindow,
-    pub user: Option<User>,
-    pub config: Config,
 }
 
-impl Window {
-    pub fn new() -> Self {
-        let brn = gtk::Button::new_with_label("Click");
-        let builder = gtk::Builder::new_from_resource("/li/per/pl/window.ui");
-        let widget: gtk::ApplicationWindow = builder
-            .get_object("window")
+impl Default for Win {
+    fn default() -> Self {
+        let config = AppConfig::default();
+        let builder = gtk::Builder::from_file("/home/chrisp/per/gtp/pl/src/window.ui");
+        let widget: gtk::ApplicationWindow = builder.get_object("window")
             .expect("Failed to find the window object");
+        Self { config, widget }
+    }
+}
 
-        Self { widget }
+impl Win {
+    pub fn new() -> Self {
+        Self::default()
     }
 }

@@ -12,12 +12,13 @@ export APP_BIN="$5"
 if [ $BUILDTYPE = "release" ]
 then
     echo "RELEASE MODE"
-    cargo-watch --manifest-path \
+    cargo builid --manifest-path \
         "$MESON_SOURCE_ROOT"/Cargo.toml --release && \
         cp "$CARGO_TARGET_DIR"/release/"$APP_BIN" "$OUTPUT"
 else
     echo "DEBUG MODE"
-    cargo-watch --manifest-path \
+    /home/chrisp/.cargo/bin/cargo-watch -x check -s 'touch .trigger' &&
+    /home/chrisp/.cargo/bin/cargo watch --no-gitignore -w .trigger -x run --manifest-path \
         "$MESON_SOURCE_ROOT"/Cargo.toml --verbose && \
         cp "$CARGO_TARGET_DIR"/debug/"$APP_BIN" "$OUTPUT"
 fi
