@@ -32,10 +32,17 @@ keyring = "*"
 toml = "*"
 gobject-sys = "0.10.0"
 html2pango = "*"
-sourceview4 = "*"
+# sourceview4 = "*"
 gtk-sys = "*"
-libhandy = "*"
 libappindicator = "*"
+libhandy = "0.7.1"
+# gst = "0.1.3"
+glib = "0.10.3"
+gtk = "0.9.2"
+gdk = "0.13.2"
+gio = "0.9.1"
+gettext-rs = "0.5.0"
+# ordered-float = "2.0.1"
 # gspell = "*"
 # url = { version = "*", features = ["serde"]}
 # gst = "*"
@@ -44,26 +51,6 @@ libappindicator = "*"
 # relm = "0.20.0"
 # relm-derive = "0.20.0"
 # shrinkwraps = "*"
-
-[dependencies.gtk]
-version = "0.9.2"
-features = ["v3_24"]
-
-[dependencies.gdk]
-version = "0.13.2"
-features = ["v3_24"]
-
-[dependencies.gio]
-version = "0.9.1"
-features = ["v2_60"]
-
-[dependencies.glib]
-version = "0.10.3"
-features = ["v2_60"]
-
-[dependencies.gettext-rs]
-version = "0.5.0"
-features = ["gettext-system"]
 
 [profile.release]
 lto = "thin"

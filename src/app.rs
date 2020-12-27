@@ -21,7 +21,7 @@ impl App {
         let state = state::State::default();
         Self::startup()?;
         let builder = gtk::Builder::from_file("/home/chrisp/div/ui/gtk/divis/res/ui/main.ui");
-        let main_window: gtk::ApplicationWindow = builder.get_object("window")
+        let main_window: gtk::ApplicationWindow = builder.get_object("window");
         let app = gtk::Application::new(Some(config::APP_ID), gio::ApplicationFlags::empty())?;
 
         Self {

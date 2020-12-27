@@ -1,5 +1,5 @@
 {
-    "app-id" : "li.per.pl",
+    "app-id" : "is.div.di",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "3.38",
     "sdk" : "org.gnome.Sdk",
@@ -19,7 +19,7 @@
             "--share=network"
         ],
         "env" : {
-            "CARGO_HOME" : "/run/build/pl/cargo",
+            "CARGO_HOME" : "/run/build/di/cargo",
             "RUST_BACKTRACE" : "1",
             "RUST_LOG" : "pl=debug"
         }
@@ -37,13 +37,26 @@
     ],
     "modules" : [
         {
-            "name" : "pl",
+            "name" : "di",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "file:///home/chrisp/per/gtp/pl"
+                    "url" : "file:///home/chrisp/div/ui/gtk/divis"
+                }
+            ]
+        },
+	{
+            "name" : "gst-editing-services",
+            "config-opts" : [
+                "--disable-Werror"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.freedesktop.org/gstreamer/gst-editing-services.git",
+                    "tag" : "1.16.1"
                 }
             ]
         }

@@ -1,5 +1,4 @@
 pub mod config;
-pub mod window;
 pub mod models;
 pub mod app;
 pub mod ui;

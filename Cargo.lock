@@ -403,7 +403,6 @@ dependencies = [
  "pango",
  "rand",
  "serde 1.0.118",
- "sourceview4",
  "toml",
  "uuid",
 ]
@@ -1765,47 +1764,6 @@ name = "slab"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c111b5bd5695e56cffe5129854aa230b39c93a305372fdbb2668ca2394eea9f8"
-
-[[package]]
-name = "sourceview4"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67cf21c78ea4fd60f3c321209952304d54d9ee8d543eaa321ec9d687525d65b0"
-dependencies = [
- "bitflags",
- "cairo-rs",
- "gdk",
- "gdk-pixbuf",
- "gdk-sys",
- "gio",
- "gio-sys",
- "glib",
- "glib-sys",
- "gobject-sys",
- "gtk",
- "gtk-sys",
- "libc",
- "pango",
- "sourceview4-sys",
-]
-
-[[package]]
-name = "sourceview4-sys"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1b24736d28cedce710e726ad2e511662e65f496ca54615724686fd14ad3bd490"
-dependencies = [
- "cairo-sys-rs",
- "gdk-pixbuf-sys",
- "gdk-sys",
- "gio-sys",
- "glib-sys",
- "gobject-sys",
- "gtk-sys",
- "libc",
- "pkg-config",
- "system-deps",
-]
 
 [[package]]
 name = "static_assertions"
