@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=pl
-Exec=pl
+Name=DI
+Exec=di
 Terminal=false
 Type=Application
 Categories=GTK;
