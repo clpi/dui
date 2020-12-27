@@ -43,7 +43,6 @@ sources = files(
   'lib.rs',
   'ui.rs',
   'models.rs',
-  'window.rs',
   'error.rs',
   'util.rs'
 )
