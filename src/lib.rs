@@ -4,12 +4,12 @@ use gtk::prelude::*;
 use crossbeam_channel::unbounded;
 
 pub mod config;
-pub mod app_config;
 pub mod window;
 pub mod models;
 pub mod app;
 pub mod ui;
 pub mod state;
+pub mod util;
 
 use crate::{
     window::Win,

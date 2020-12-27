@@ -29,9 +29,23 @@ run_command(
 )
 
 sources = files(
+  'bin/di.rs',
+  'models/link.rs',
+  'models/topic.rs',
+  'models/user.rs',
+  'models/record.rs',
+  'models/attribute.rs',
+  'models/fact.rs',
+  'models/item.rs',
+  'models/group.rs',
   'config.rs',
-  'main.rs',
+  'models/types.rs',
+  'lib.rs',
+  'ui.rs',
+  'models.rs',
   'window.rs',
+  'error.rs',
+  'util.rs'
 )
 
 cargo_script = find_program(join_paths(meson.source_root(), 'build-aux/cargo.sh'))

@@ -1,6 +1,6 @@
 use gtk::prelude::*;
 use crate::{
-    app_config::AppConfig, models::user::User,
+     models::user::User, state::AppConfig,
 };
 
 pub struct Win {
@@ -11,7 +11,7 @@ pub struct Win {
 impl Default for Win {
     fn default() -> Self {
         let config = AppConfig::default();
-        let builder = gtk::Builder::from_file("/home/chrisp/per/gtp/pl/src/window.ui");
+        let builder = gtk::Builder::from_file("/home/chrisp/div/ui/gtk/divis/res/ui/main.ui");
         let widget: gtk::ApplicationWindow = builder.get_object("window")
             .expect("Failed to find the window object");
         Self { config, widget }
