@@ -12,7 +12,17 @@ pub struct App {
     pub main_window: gtk::ApplicationWindow,
     pub state: state::State,
     pub config: state::AppConfig,
+}
 
+pub enum Msg {
+    Login(crate::models::User),
+    Logout,
+    NewFact(crate::models::Fact),
+    NewRecord(crate::models::Record),
+    NewItem(crate::models::Item),
+    EditFact(crate::models::Fact),
+    EditRecord(crate::models::Record),
+    EditItem(crate::models::Item),
 }
 
 impl App {
@@ -21,23 +31,23 @@ impl App {
         let state = state::State::default();
         Self::startup()?;
         let builder = gtk::Builder::from_file("/home/chrisp/div/ui/gtk/divis/res/ui/main.ui");
-        let main_window: gtk::ApplicationWindow = builder.get_object::<gtk::Window>("window");
+        let main_window: gtk::ApplicationWindow = builder.get_object("window").expect("Could not get window");
         let app = gtk::Application::new(Some(crate::config::APP_ID), gio::ApplicationFlags::empty())?;
 
-        Ok(Self { app, config, state, builder, main_window }
+        Ok(Self { app, config, state, builder, main_window })
     }
 
     pub fn startup() -> Result<(), Box<dyn std::error::Error>> {
         gtk::init().unwrap_or_else(|_| panic!("Failed to initialize GTK."));
         glib::set_program_name(Some("div.is"));
         glib::set_application_name("div.is".into());
-        gst::init()?;
+        //gst::init()?;
 
         setlocale(LocaleCategory::LcAll, "");
-        bindtextdomain("pl", config::LOCALEDIR);
+        bindtextdomain("pl", crate::config::LOCALEDIR);
         textdomain("pl");
 
-        let res = gio::Resource::load(config::PKGDATADIR.to_owned() + "/di.gresource")
+        let res = gio::Resource::load(crate::config::PKGDATADIR.to_owned() + "/di.gresource")
             .expect("Could not load resources");
         gio::resources_register(&res);
         Ok(())
@@ -55,13 +65,13 @@ impl App {
     pub fn run(self) -> Result<(), Box<dyn std::error::Error>> {
         self.app.connect_activate(move |app| {
             let window = app.run(&[]);
-            let (mut req_recv, req_updt) = unbounded::<State>();
+            let (mut req_recv, req_updt) = unbounded::<state::State>();
             let (res_send, res_recv) = glib::MainContext::channel(glib::PRIORITY_DEFAULT);
             let icon_theme = gtk::IconTheme::get_default().expect("Could not load icon theme");
 
-            window.widget.set_application(Some(app));
-            app.add_window(&window.widget);
-            window.widget.present();
+            self.main_window.set_application(Some(app));
+            app.add_window(&self.main_window);
+            self.main_window.present();
         });
 
         let ret = app.run(&std::env::args().collect::<Vec<_>>());

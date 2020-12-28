@@ -10,3 +10,5 @@ pub mod types;
 
 pub use user::User;
 pub use fact::Fact;
+pub use record::Record;
+pub use item::Item;

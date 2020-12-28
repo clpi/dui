@@ -12,7 +12,7 @@ impl TryFrom<gtk::Builder> for Preferences {
 
     fn try_from(builder: gtk::Builder) -> Result<Self, Self::Error> {
         builder.add_from_file("../res/ui/about.ui")?;
-        let root = builder.get_object::<gtk::Window>("preferences")?;
+        let root: gtk::Window = builder.get_object("preferences").expect("Could not get preferences window");
         Ok(Self { root })
     }
 }

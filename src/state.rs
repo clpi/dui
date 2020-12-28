@@ -6,9 +6,9 @@ use dirs_next::{home_dir, data_local_dir};
 
 
 /// Defines the state for the app
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct State {
-
+    auth_creds: Option<User>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -14,8 +14,8 @@ impl TryFrom<gtk::Builder> for About {
     fn try_from(builder: gtk::Builder) -> About {
         builder.add_from_file("../res/ui/about.ui")
             .expect("Could not load about dialog UI file");
-        let root = builder.get_object::<gtk::Popover>("search_popover")?;
-        let search = builder.get_objeect::<gtk::SearchBar>("search_bar")?;
+        let root: gtk::Popover = builder.get_object("search_popover").expect("Could not get search popover");
+        let search: gtk::SearchBar = builder.get_object("search_bar").expect("Could not get searchbar");
         Ok(Self { root, search })
     }
 }

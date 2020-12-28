@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
 use chrono::{DateTime, Utc};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct User {
     pub id: uuid::Uuid,
     pub username: String,
@@ -20,3 +20,4 @@ impl Default for User {
         }
     }
 }
+
