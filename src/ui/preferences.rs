@@ -1,15 +1,18 @@
+use std::convert::TryFrom;
 use gtk::prelude::*;
 
+#[derive(Clone, Debug)]
 pub struct Preferences {
-    root: gtk::Window,
+    pub root: gtk::Window,
 }
 
-impl From<gtk::Builder> for About {
-    fn from(builder: gtk::Builder) -> About {
-        builder.add_from_file("../res/ui/about.ui")
-            .expect("Could not load preferences UI file");
-       let root = builder.get_object::<gtk::Window>("preferences")
-            .expect("Did not find preferences in UI schema");
-        Self { root }
+impl TryFrom<gtk::Builder> for Preferences {
+
+    type Error = Box<dyn std::error::Error>;
+
+    fn try_from(builder: gtk::Builder) -> Result<Self, Self::Error> {
+        builder.add_from_file("../res/ui/about.ui")?;
+        let root = builder.get_object::<gtk::Window>("preferences")?;
+        Ok(Self { root })
     }
 }

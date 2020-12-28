@@ -1,15 +1,20 @@
+use std::convert::TryFrom;
 use gtk::prelude::*;
 
+#[derive(Clone, Debug)]
 pub struct About {
-    root: gtk::AboutDialog,
+    pub root: gtk::AboutDialog,
+    close: gtk::Button,
 }
 
-impl From<gtk::Builder> for About {
-    fn from(builder: gtk::Builder) -> About {
-        builder.add_from_file("../res/ui/about.ui")
-            .expect("Could not load about dialog UI file");
-       let root = builder.get_object::<gtk::AboutDialog>("about_dialog")
-            .expect("Did not find about dialog in UI schema");
-        Self { root }
+impl TryFrom<gtk::Builder> for About {
+
+    type Error = Box<dyn std::error::Error>;
+
+    fn try_from(builder: gtk::Builder) -> Result<Self, Self::Error> {
+        builder.add_from_file("../res/ui/about.ui")?;
+        let root = builder.get_object::<gtk::AboutDialog>("about_dialog")?;
+        let close = builder.get_objeect::<gtk::Button>("close_btn")?;
+        Ok(Self { root, close })
     }
 }

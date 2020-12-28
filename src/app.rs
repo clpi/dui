@@ -16,17 +16,15 @@ pub struct App {
 }
 
 impl App {
-    pub fn new() -> Self {
+    pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
         let config = state::AppConfig::default();
         let state = state::State::default();
         Self::startup()?;
         let builder = gtk::Builder::from_file("/home/chrisp/div/ui/gtk/divis/res/ui/main.ui");
-        let main_window: gtk::ApplicationWindow = builder.get_object("window");
-        let app = gtk::Application::new(Some(config::APP_ID), gio::ApplicationFlags::empty())?;
+        let main_window: gtk::ApplicationWindow = builder.get_object::<gtk::Window>("window");
+        let app = gtk::Application::new(Some(crate::config::APP_ID), gio::ApplicationFlags::empty())?;
 
-        Self {
-            app, config, state, builder, main_window,
-        }
+        Ok(Self { app, config, state, builder, main_window }
     }
 
     pub fn startup() -> Result<(), Box<dyn std::error::Error>> {
@@ -71,6 +69,7 @@ impl App {
         Ok(())
 
     }
+
 
 
 }

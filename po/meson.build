@@ -1,1 +1,1 @@
-i18n.gettext('pl', preset: 'glib')
+i18n.gettext('di', preset: 'glib')
